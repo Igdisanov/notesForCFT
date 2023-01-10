@@ -7,4 +7,14 @@
 
 class NotesPresenter {
     
+    weak var view: NotesViewInput?
+    
+    private var notes: [Note] = []
+    
+}
+
+extension NotesPresenter: NotesViewOutput {
+    func set(view: NotesViewInput?) {
+        self.view = view
+    }
 }
