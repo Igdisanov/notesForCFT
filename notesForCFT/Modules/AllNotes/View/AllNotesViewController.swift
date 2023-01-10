@@ -7,12 +7,12 @@
 
 import UIKit
 
-class NotesViewController: UIViewController {
+class AllNotesViewController: UIViewController {
     
-    private let output: NotesViewOutput
+    private let output: AllNotesViewOutput
     
     init() {
-        self.output = NotesPresenter()
+        self.output = AllNotesPresenter()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,7 +28,7 @@ class NotesViewController: UIViewController {
     
 }
 
-extension NotesViewController: NotesViewInput {
+extension AllNotesViewController: AllNotesViewInput {
     
 }
 

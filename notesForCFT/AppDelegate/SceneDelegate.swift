@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let ws = (scene as? UIWindowScene) else { return }
         let myWindow = UIWindow(windowScene: ws)
-        let notesVC = NotesViewController()
+        let notesVC = AllNotesViewController()
         let navigationBarController = UINavigationController(rootViewController: notesVC)
         myWindow.rootViewController = navigationBarController
         

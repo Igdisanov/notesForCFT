@@ -5,6 +5,6 @@
 //  Created by Vadim Igdisanov on 10.01.2023.
 //
 
-protocol NotesViewInput: AnyObject {
+protocol AllNotesViewInput: AnyObject {
     
 }

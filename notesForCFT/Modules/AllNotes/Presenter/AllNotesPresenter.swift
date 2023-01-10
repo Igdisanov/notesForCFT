@@ -5,16 +5,16 @@
 //  Created by Vadim Igdisanov on 10.01.2023.
 //
 
-class NotesPresenter {
+class AllNotesPresenter {
     
-    weak var view: NotesViewInput?
+    weak var view: AllNotesViewInput?
     
     private var notes: [Note] = []
     
 }
 
-extension NotesPresenter: NotesViewOutput {
-    func set(view: NotesViewInput?) {
+extension AllNotesPresenter: AllNotesViewOutput {
+    func set(view: AllNotesViewInput?) {
         self.view = view
     }
 }
