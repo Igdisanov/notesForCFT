@@ -7,4 +7,5 @@
 
 protocol AllNotesViewOutput: AnyObject {
     func set(view: AllNotesViewInput?)
+    func presentCreateNote()
 }

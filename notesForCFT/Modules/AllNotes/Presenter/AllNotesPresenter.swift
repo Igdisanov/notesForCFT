@@ -17,4 +17,9 @@ extension AllNotesPresenter: AllNotesViewOutput {
     func set(view: AllNotesViewInput?) {
         self.view = view
     }
+    
+    func presentCreateNote() {
+        let createNoteVC = NoteViewController()
+        view?.presenVC(vc: createNoteVC)
+    }
 }
