@@ -15,6 +15,7 @@ class AllNotesViewController: UIViewController {
                                action: #selector(createNewNoteButtonTapped))
     }()
     
+    var notes: [Note]?
     private let output: AllNotesViewOutput
     private let noteTableView = UITableView()
     
@@ -35,7 +36,7 @@ class AllNotesViewController: UIViewController {
     }
     
     @objc func createNewNoteButtonTapped() {
-        output.presentCreateNote()
+        output.presentCreateNote(note: nil)
     }
     
     private func setupUI() {
@@ -80,14 +81,16 @@ extension AllNotesViewController: AllNotesViewInput {
 
 extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return notes?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableCell.className, for: indexPath) as! NoteTableCell
-        
-        cell.setupLabelCell(note: Note(name: "Vadim", descriptions: "dslldf dflvdv  adfvladf vadfvlf adfvdvadfv dfvdfv ddgfgd sdfgdgf sgagadfga gsgsg stgsdfbsdfgbs fgbsf ssg sgs sg g gstgtgb"))
-        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if let note = notes?[indexPath.row] {
+            cell.setupLabelCell(note: note)
+        } else {
+            cell.setupLabelCell(note: Note(name: "Название заметки", descriptions: "Описание"))
+        }
         return cell
     }
     
@@ -96,7 +99,11 @@ extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.presentCreateNote()
+        if let note = notes?[indexPath.row] {
+            output.presentCreateNote(note: note)
+        } else {
+            output.presentCreateNote(note: Note(name: "Название заметки", descriptions: "Описание"))
+        }
     }
 }
 

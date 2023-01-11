@@ -34,7 +34,8 @@ class NoteTableCell: UITableViewCell {
         descriptionLabel.text = nil
     }
     
-    func setupLabelCell(note: Note) {
+    func setupLabelCell(note: Note?) {
+        guard let note = note else {return}
         self.nameLabel.text = note.name
         self.descriptionLabel.text = note.descriptions
         setupUI()

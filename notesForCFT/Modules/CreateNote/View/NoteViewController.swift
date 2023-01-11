@@ -9,18 +9,22 @@ import UIKit
 
 class NoteViewController: UIViewController {
     
-    private var isNewNote = true
     
-    private lazy var createNewNoteBarButton: UIBarButtonItem = {
-        if isNewNote {
-            return UIBarButtonItem(barButtonSystemItem: .save,
-                                   target: self,
-                                   action: #selector(saveNewNoteButtonTapped))
-        } else {
-            return UIBarButtonItem(barButtonSystemItem: .cancel,
-                                   target: self,
-                                   action: #selector(cancelButtonTapped))
-        }
+    
+    private lazy var saveNewNoteBarButton: UIBarButtonItem = {
+        
+        return UIBarButtonItem(barButtonSystemItem: .save,
+                               target: self,
+                               action: #selector(saveNewNoteButtonTapped))
+        
+    }()
+    
+    private lazy var cancelNewNoteBarButton: UIBarButtonItem = {
+        
+        return UIBarButtonItem(barButtonSystemItem: .cancel,
+                               target: self,
+                               action: #selector(cancelButtonTapped))
+        
     }()
     
     private lazy var nameTextField: UITextField = {
@@ -43,9 +47,12 @@ class NoteViewController: UIViewController {
     
     private let output: NoteViewOutput
     
-    init() {
+    init(note: Note?) {
         self.output = NotePresenter()
         super.init(nibName: nil, bundle: nil)
+        guard let note = note else {return}
+        self.nameTextField.text = note.name
+        self.descriptionTextView.text = note.descriptions
     }
     
     required init?(coder: NSCoder) {
@@ -58,6 +65,8 @@ class NoteViewController: UIViewController {
         output.set(view: self)
         setupUI()
         nameTextField.becomeFirstResponder()
+        nameTextField.delegate = self
+        saveNewNoteBarButton.isEnabled = false
     }
     
     @objc func saveNewNoteButtonTapped() {
@@ -75,13 +84,9 @@ class NoteViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        let titleLabel = UILabel()
-        titleLabel.text = "Новая заметка"
-        titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        titleLabel.textColor = .gray
-        let titleItem = UIBarButtonItem(customView: titleLabel)
-        navigationItem.leftBarButtonItems = [titleItem]
-        navigationItem.rightBarButtonItems = [createNewNoteBarButton]
+        navigationItem.title = "Новая заметка"
+        navigationItem.leftBarButtonItems = [cancelNewNoteBarButton]
+        navigationItem.rightBarButtonItems = [saveNewNoteBarButton]
     }
     
     private func setupNameTextField() {
@@ -103,5 +108,17 @@ class NoteViewController: UIViewController {
 
 extension NoteViewController: NoteViewInput {
     
+}
+
+extension NoteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
+        if text.isEmpty {
+            saveNewNoteBarButton.isEnabled = false
+        } else {
+            saveNewNoteBarButton.isEnabled = true
+        }
+         return true
+    }
 }
 
