@@ -10,7 +10,7 @@ import UIKit
 class AllNotesViewController: UIViewController {
     
     private lazy var createNewNoteBarButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .done,
+        return UIBarButtonItem(barButtonSystemItem: .compose,
                                target: self,
                                action: #selector(createNewNoteButtonTapped))
     }()
@@ -55,7 +55,7 @@ class AllNotesViewController: UIViewController {
 
 extension AllNotesViewController: AllNotesViewInput {
     func presenVC(vc: UIViewController) {
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
