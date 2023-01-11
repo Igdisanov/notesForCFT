@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5231F3E7296E867900FC56FA /* NoteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F3E6296E867900FC56FA /* NoteTableCell.swift */; };
 		5282C393296D78BA0091CBA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282C392296D78BA0091CBA1 /* AppDelegate.swift */; };
 		5282C395296D78BA0091CBA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282C394296D78BA0091CBA1 /* SceneDelegate.swift */; };
 		5282C397296D78BA0091CBA1 /* AllNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282C396296D78BA0091CBA1 /* AllNotesViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5231F3E6296E867900FC56FA /* NoteTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableCell.swift; sourceTree = "<group>"; };
 		5282C38F296D78BA0091CBA1 /* notesForCFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = notesForCFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5282C392296D78BA0091CBA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5282C394296D78BA0091CBA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5231F3E5296E866900FC56FA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5231F3E6296E867900FC56FA /* NoteTableCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		5282C386296D78BA0091CBA1 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		529893B6296D8D0600994D88 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5231F3E5296E866900FC56FA /* Cells */,
 				5282C396296D78BA0091CBA1 /* AllNotesViewController.swift */,
 				529893BD296D8EBE00994D88 /* AllNotesViewOutput.swift */,
 				529893BF296D8FA100994D88 /* AllNotesViewInput.swift */,
@@ -263,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5282C397296D78BA0091CBA1 /* AllNotesViewController.swift in Sources */,
+				5231F3E7296E867900FC56FA /* NoteTableCell.swift in Sources */,
 				529893CD296DC2E900994D88 /* NoteViewInput.swift in Sources */,
 				529893C0296D8FA100994D88 /* AllNotesViewInput.swift in Sources */,
 				529893CE296DC2E900994D88 /* NoteViewOutput.swift in Sources */,
