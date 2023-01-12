@@ -46,6 +46,7 @@ class NoteViewController: UIViewController {
     }()
     
     private let output: NoteViewOutput
+    private var noteToChange: Note?
     
     init(note: Note?) {
         self.output = NotePresenter()
@@ -53,6 +54,7 @@ class NoteViewController: UIViewController {
         guard let note = note else {return}
         self.nameTextField.text = note.name
         self.descriptionTextView.text = note.descriptions
+        self.noteToChange = note
     }
     
     required init?(coder: NSCoder) {
@@ -61,6 +63,7 @@ class NoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        output.viewDidLoad()
         view.backgroundColor = .white
         output.set(view: self)
         setupUI()
@@ -71,6 +74,9 @@ class NoteViewController: UIViewController {
     
     @objc func saveNewNoteButtonTapped() {
         navigationController?.popViewController(animated: true)
+        guard let name = nameTextField.text, let description = descriptionTextView.text else {return}
+        let note = Note(name: name, descriptions: description)
+        output.saveNotes(note: note, noteToChange: noteToChange)
     }
     
     @objc func cancelButtonTapped() {

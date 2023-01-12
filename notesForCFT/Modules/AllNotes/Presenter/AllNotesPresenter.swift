@@ -14,6 +14,13 @@ class AllNotesPresenter {
 }
 
 extension AllNotesPresenter: AllNotesViewOutput {
+    
+    func viewWillAppear() {
+        guard let notes = NotesSettings.notes else {return}
+        self.notes = notes
+        view?.setNotes(notes: self.notes)
+    }
+    
     func set(view: AllNotesViewInput?) {
         self.view = view
     }

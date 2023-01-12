@@ -6,6 +6,7 @@
 //
 
 protocol AllNotesViewOutput: AnyObject {
+    func viewWillAppear()
     func set(view: AllNotesViewInput?)
     func presentCreateNote(note: Note?)
 }

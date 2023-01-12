@@ -9,4 +9,5 @@ import UIKit
 
 protocol AllNotesViewInput: AnyObject {
     func presenVC(vc: UIViewController)
+    func setNotes(notes: [Note])
 }

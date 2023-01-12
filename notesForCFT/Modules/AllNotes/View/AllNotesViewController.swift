@@ -16,6 +16,7 @@ class AllNotesViewController: UIViewController {
     }()
     
     var notes: [Note]?
+    private let defoultNotes = Note(name: "Название заметки", descriptions: "Описание")
     private let output: AllNotesViewOutput
     private let noteTableView = UITableView()
     
@@ -33,6 +34,12 @@ class AllNotesViewController: UIViewController {
         view.backgroundColor = .white
         output.set(view: self)
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewWillAppear()
+        noteTableView.reloadData()
     }
     
     @objc func createNewNoteButtonTapped() {
@@ -74,6 +81,11 @@ class AllNotesViewController: UIViewController {
 }
 
 extension AllNotesViewController: AllNotesViewInput {
+    
+    func setNotes(notes: [Note]) {
+        self.notes = notes
+    }
+    
     func presenVC(vc: UIViewController) {
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -89,7 +101,7 @@ extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
         if let note = notes?[indexPath.row] {
             cell.setupLabelCell(note: note)
         } else {
-            cell.setupLabelCell(note: Note(name: "Название заметки", descriptions: "Описание"))
+            cell.setupLabelCell(note: defoultNotes)
         }
         return cell
     }
@@ -102,7 +114,7 @@ extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
         if let note = notes?[indexPath.row] {
             output.presentCreateNote(note: note)
         } else {
-            output.presentCreateNote(note: Note(name: "Название заметки", descriptions: "Описание"))
+            output.presentCreateNote(note: defoultNotes)
         }
     }
 }
