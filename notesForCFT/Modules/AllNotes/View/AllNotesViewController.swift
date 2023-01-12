@@ -9,16 +9,22 @@ import UIKit
 
 class AllNotesViewController: UIViewController {
     
+    // MARK: - Visual Components
+    
     private lazy var createNewNoteBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .compose,
                                target: self,
                                action: #selector(createNewNoteButtonTapped))
     }()
     
-    var notes: [Note]?
+    // MARK: - Private Properties
+    
+    private var notes: [Note]?
     private let defoultNotes = Note(name: "Название заметки", descriptions: "Описание")
     private let output: AllNotesViewOutput
     private let noteTableView = UITableView()
+    
+    // MARK: - Initializers
     
     init() {
         self.output = AllNotesPresenter()
@@ -42,9 +48,13 @@ class AllNotesViewController: UIViewController {
         noteTableView.reloadData()
     }
     
+    // MARK: - Action Methods
+    
     @objc func createNewNoteButtonTapped() {
         output.presentCreateNote(note: nil)
     }
+    
+    // MARK: - Setup UI
     
     private func setupUI() {
         setupNavigationBar()
@@ -80,6 +90,8 @@ class AllNotesViewController: UIViewController {
     
 }
 
+// MARK: - AllNotesViewInput
+
 extension AllNotesViewController: AllNotesViewInput {
     
     func setNotes(notes: [Note]) {
@@ -90,6 +102,8 @@ extension AllNotesViewController: AllNotesViewInput {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

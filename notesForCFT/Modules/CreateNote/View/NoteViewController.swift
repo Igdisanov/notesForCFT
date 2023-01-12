@@ -9,7 +9,7 @@ import UIKit
 
 class NoteViewController: UIViewController {
     
-    
+    // MARK: - Visual Components
     
     private lazy var saveNewNoteBarButton: UIBarButtonItem = {
         
@@ -45,8 +45,12 @@ class NoteViewController: UIViewController {
         return textView
     }()
     
+    // MARK: - Private Properties
+    
     private let output: NoteViewOutput
     private var noteToChange: Note?
+    
+    // MARK: - Initializers
     
     init(note: Note?) {
         self.output = NotePresenter()
@@ -73,6 +77,8 @@ class NoteViewController: UIViewController {
         saveNewNoteBarButton.isEnabled = false
     }
     
+    // MARK: - Action Methods
+    
     @objc func saveNewNoteButtonTapped() {
         navigationController?.popViewController(animated: true)
         guard let name = nameTextField.text, let description = descriptionTextView.text else {return}
@@ -83,6 +89,8 @@ class NoteViewController: UIViewController {
     @objc func cancelButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - Setup UI
     
     private func setupUI() {
         setupNavigationBar()
@@ -111,6 +119,8 @@ class NoteViewController: UIViewController {
         descriptionTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40).isActive = true
     }
     
+    // MARK: - Private Methods
+    
     private func enabledSaveButton(range: NSRange, text: String?, replacement: String) {
         let text = (text! as NSString).replacingCharacters(in: range, with: replacement)
         if text.isEmpty {
@@ -122,9 +132,13 @@ class NoteViewController: UIViewController {
     
 }
 
+// MARK: - NoteViewInput
+
 extension NoteViewController: NoteViewInput {
     
 }
+
+// MARK: - UITextFieldDelegate
 
 extension NoteViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -132,6 +146,8 @@ extension NoteViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MARK: - UITextViewDelegate
 
 extension NoteViewController: UITextViewDelegate {
     

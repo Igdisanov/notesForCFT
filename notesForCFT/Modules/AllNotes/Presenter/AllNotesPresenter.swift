@@ -7,11 +7,17 @@
 
 class AllNotesPresenter {
     
+    // MARK: - Properties
+    
     weak var view: AllNotesViewInput?
+    
+    // MARK: - Private Properties
     
     private var notes: [Note] = []
     
 }
+
+// MARK: - AllNotesViewOutput
 
 extension AllNotesPresenter: AllNotesViewOutput {
     

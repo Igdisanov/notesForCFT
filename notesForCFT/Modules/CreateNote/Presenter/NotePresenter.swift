@@ -7,11 +7,17 @@
 
 class NotePresenter {
     
+    // MARK: - Properties
+    
     weak var view: NoteViewInput?
+    
+    // MARK: - Private Properties
     
     private var notes: [Note] = []
     
 }
+
+// MARK: - NoteViewOutput
 
 extension NotePresenter: NoteViewOutput {
     
