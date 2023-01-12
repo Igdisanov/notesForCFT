@@ -69,6 +69,7 @@ class NoteViewController: UIViewController {
         setupUI()
         nameTextField.becomeFirstResponder()
         nameTextField.delegate = self
+        descriptionTextView.delegate = self
         saveNewNoteBarButton.isEnabled = false
     }
     
@@ -110,6 +111,15 @@ class NoteViewController: UIViewController {
         descriptionTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40).isActive = true
     }
     
+    private func enabledSaveButton(range: NSRange, text: String?, replacement: String) {
+        let text = (text! as NSString).replacingCharacters(in: range, with: replacement)
+        if text.isEmpty {
+            saveNewNoteBarButton.isEnabled = false
+        } else {
+            saveNewNoteBarButton.isEnabled = true
+        }
+    }
+    
 }
 
 extension NoteViewController: NoteViewInput {
@@ -118,13 +128,18 @@ extension NoteViewController: NoteViewInput {
 
 extension NoteViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let text = (nameTextField.text! as NSString).replacingCharacters(in: range, with: string)
-        if text.isEmpty {
-            saveNewNoteBarButton.isEnabled = false
-        } else {
-            saveNewNoteBarButton.isEnabled = true
-        }
-         return true
+        self.enabledSaveButton(range: range, text: nameTextField.text, replacement: string)
+        return true
     }
 }
+
+extension NoteViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.enabledSaveButton(range: range, text: descriptionTextView.text, replacement: text)
+        return true
+    }
+}
+
+
 
