@@ -29,4 +29,14 @@ extension AllNotesPresenter: AllNotesViewOutput {
         let createNoteVC = NoteViewController(note: note)
         view?.presenVC(vc: createNoteVC)
     }
+    
+    func deleteNote(note: Note) {
+        for (index, value) in notes.enumerated() {
+            if value == note {
+                notes.remove(at: index)
+            }
+        }
+        view?.setNotes(notes: self.notes)
+        NotesSettings.notes = notes
+    }
 }

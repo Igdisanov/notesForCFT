@@ -117,5 +117,11 @@ extension AllNotesViewController: UITableViewDelegate, UITableViewDataSource {
             output.presentCreateNote(note: defoultNotes)
         }
     }
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let note = notes?[indexPath.row] else {return}
+        output.deleteNote(note: note)
+        self.noteTableView.deleteRows(at: [indexPath], with: .automatic)
+    }
 }
 

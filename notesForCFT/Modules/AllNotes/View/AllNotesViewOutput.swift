@@ -9,4 +9,5 @@ protocol AllNotesViewOutput: AnyObject {
     func viewWillAppear()
     func set(view: AllNotesViewInput?)
     func presentCreateNote(note: Note?)
+    func deleteNote(note: Note)
 }
